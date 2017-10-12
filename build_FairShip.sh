@@ -10,7 +10,7 @@ mkdir -p $SHIPSOFT
 
 git clone https://github.com/ShipSoft/FairShip.git $FAIRSHIP
 cd $FAIRSHIP
-git checkout tag/v2-10
+git checkout v2-10
 ./configure.sh
 
 # cleanup
