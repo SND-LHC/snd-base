@@ -7,7 +7,7 @@ export PYTHONPATH=$FAIRSHIP/python:$SIMPATH/lib:$SIMPATH/lib/Geant4:$PYTHONPATH
 
 mkdir -p $SHIPSOFT
 
-git clone -b master https://github.com/ShipSoft/FairRoot.git $SHIPSOFT/FairRoot
+git clone https://github.com/ShipSoft/FairRoot.git $SHIPSOFT/FairRoot -b Oct17-ship
 cd $SHIPSOFT/FairRoot
 ./configure.sh
 

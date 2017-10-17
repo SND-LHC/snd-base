@@ -4,7 +4,7 @@ export SHIPSOFT=/opt
 
 mkdir -p $SHIPSOFT
 
-git clone -b master https://github.com/ShipSoft/FairSoft.git $SHIPSOFT/FairSoft
+git clone https://github.com/ShipSoft/FairSoft.git $SHIPSOFT/FairSoft -b Oct17-ship
 cd $SHIPSOFT/FairSoft
 echo 1 | ./configure.sh
 
