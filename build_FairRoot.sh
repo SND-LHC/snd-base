@@ -10,6 +10,3 @@ mkdir -p $SHIPSOFT
 git clone -b master https://github.com/ShipSoft/FairRoot.git $SHIPSOFT/FairRoot
 cd $SHIPSOFT/FairRoot
 ./configure.sh
-
-# clean up
-rm -rf $SHIPSOFT/FairRoot
