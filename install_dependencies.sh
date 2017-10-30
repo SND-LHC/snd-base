@@ -25,4 +25,4 @@ yum -y install openssl openssl-devel openssl-CERN-CA-certs
 yum -y install curl libcurl libcurl-openssl automake autoconf aclocal libcurl-devel libtool cmake bzip2 bzip2-devel
 yum -y install python2-pip
 yum -y install bison{,-devel} flex{,-devel} environment-modules ncurses-devel
-yum -y perl-devel perl-ExtUtils-Embed
+yum -y install perl-devel perl-ExtUtils-Embed
