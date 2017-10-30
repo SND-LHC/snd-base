@@ -1,6 +1,6 @@
 set -e
 
-export SHIPSOFT=$PWD/./SHiPBuild
+export SHIPSOFT=/SHiPBuild
 
 mkdir -p $SHIPSOFT && cd $SHIPSOFT
 
