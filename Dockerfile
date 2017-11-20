@@ -14,5 +14,3 @@ RUN pip install pyyaml argparse
 
 COPY SHiPBuild.sh /tmp/SHiPBuild.sh
 RUN source /tmp/SHiPBuild.sh
-
-RUN pip install scipy
