@@ -1,6 +1,4 @@
-FROM cern/cc7-base
-
-RUN yum -y install yum-plugin-ovl
+FROM cern/cc7-base:20171114
 
 COPY install_dependencies.sh /tmp/install_dependencies.sh
 RUN source /tmp/install_dependencies.sh
