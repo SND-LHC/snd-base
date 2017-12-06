@@ -1,35 +1,15 @@
 set -e
-yum -y update
-# yum -y groupinstall  "X Window System"
-# yum -y install mesa-libGL mesa-libGL-devel
-# yum -y install tigervnc-server vnc
-# yum -y install tkinter
-# yum -y install mesa-libglapi
+apt-get update -y
+apt-get install -y python-dev python-pip make patch sed git-all gedit\
+    environment-modules libx11-dev libxpm-dev libxext-dev ncurses-dev\
+    libxml2-dev libxft-dev rsync libxmu-dev  ncurses-dev  curl bzip2\
+    libbz2-dev gzip unzip tar gfortran libkrb5-dev wget automake autoconf\
+    libtool bison  flex byacc libgif-dev libjpeg-dev libtiff5-dev\
+    libexpat1-dev libcurl4-openssl-dev libssl-dev libbz2-dev libbz2-dev\
+    libglu1-mesa libglu1-mesa-dev autopoint gettext \
+    libtool-bin pkg-config python-tk cmake linuxbrew-wrapper
+    texinfo
 
-yum -y install which file bc bash-completion man
-yum -y install unzip patch
-yum -y install cmake
-yum -y install gcc-c++
-yum -y install gcc-gfortran
-yum -y install git subversion
-yum -y install libX11-devel libXpm-devel libXext-devel libXft-devel
-yum install -y libXmu-devel
-# yum -y install xorg-x11-xauth libXmu-devel
-yum -y install mesa-libGL-devel mesa-libGLU-devel
-yum -y install expat-devel
-yum -y install python-mtTkinter python-devel
-yum -y install libxml2-devel
-yum -y install redhat-lsb-core
-
-# yum -y install x11vnc libpng xterm twm
-yum -y install openssl openssl-devel openssl-CERN-CA-certs
-yum -y install libcurl-openssl automake autoconf aclocal libcurl-devel libtool bzip2 bzip2-devel
-yum -y install python2-pip
-yum -y install bison{,-devel} flex{,-devel} environment-modules ncurses-devel
-yum -y install perl-devel perl-ExtUtils-Embed
-yum -y install libpng{,-devel}
-
-yum -y autoremove
-find /usr/share/locale | grep -v en | xargs rm -rf
-yum clean all
-rm -rf /var/cache/yum
+pip install --upgrade pip
+pip install matplotlib numpy scipy certifi ipython ipywidgets ipykernel\
+    notebook metakernel pyyaml
