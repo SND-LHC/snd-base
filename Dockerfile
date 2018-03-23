@@ -1,56 +1,57 @@
-FROM cern/cc7-base:20171114
+FROM cern/cc7-base:20180316
 
-COPY install_dependencies.sh /tmp/install_dependencies.sh
-RUN source /tmp/install_dependencies.sh
+RUN yum -y update \
+    && yum -y install \
+    which \
+    file \
+    bc \
+    bash-completion \
+    unzip \
+    patch \
+    gcc-{c++,gfortran} \
+    git \
+    subversion \
+    libX11-devel \
+    libXpm-devel \
+    libXext-devel \
+    libXft-devel \
+    libXmu-devel \
+    mesa-libGL-devel \
+    mesa-libGLU-devel \
+    expat-devel  \
+    python-devel \
+    libxml2-devel \
+    redhat-lsb-core \
+    openssl \
+    openssl-devel \
+    libcurl-openssl \
+    automake \
+    texinfo \
+    gettext{,-devel} \
+    autoconf \
+    libtool \
+    libcurl-devel \
+    bzip2 \
+    bzip2-devel \
+    python2-pip \
+    bison{,-devel} \
+    flex{,-devel} \
+    environment-modules \
+    ncurses-devel \
+    perl-devel \
+    perl-ExtUtils-Embed \
+    libpng{,-devel} \
+    && yum -y autoremove \
+    && find /usr/share/locale | grep -v en | xargs rm -rf \
+    && yum clean all \
+    && rm -rf /var/cache/yum \
+    && pip install alibuild
 
-RUN pip install alibuild
+RUN git clone https://github.com/ShipSoft/shipdist.git
 
-RUN mkdir SHiPBuild
+# RUN aliDoctor -c shipdist/ --defaults fairship FairShip --no-local ROOT
 
-RUN git clone https://github.com/ShipSoft/shipdist.git SHiPBuild/shipdist
+RUN aliBuild -c shipdist/ --defaults fairship build FairShip --no-local ROOT \
+	&& aliBuild clean --aggressive-cleanup
 
-RUN aliBuild -c shipdist/ --defaults fairship --chdir SHiPBuild build go Python-modules autotools\
-	&& aliBuild clean --aggressive-cleanup --chdir SHiPBuild
-
-RUN aliBuild -c shipdist/ --defaults fairship --chdir SHiPBuild build GCC-Toolchain\
-	&& aliBuild clean --aggressive-cleanup --chdir SHiPBuild
-
-RUN aliBuild -c shipdist/ --defaults fairship --chdir SHiPBuild build CMake protobuf\
-	&& aliBuild clean --aggressive-cleanup --chdir SHiPBuild
-
-RUN aliBuild -c shipdist/ --defaults fairship --chdir SHiPBuild build\
-	lhapdf\
-	&& aliBuild clean --aggressive-cleanup --chdir SHiPBuild
-
-RUN aliBuild -c shipdist/ --defaults fairship --chdir SHiPBuild build\
-	XercesC\
-	ZeroMQ\
-	boost\
-	GSL\
-	&& aliBuild clean --aggressive-cleanup --chdir SHiPBuild
-
-RUN aliBuild -c shipdist/ --defaults fairship --chdir SHiPBuild build\
-	log4cpp\
-	&& aliBuild clean --aggressive-cleanup --chdir SHiPBuild
-
-RUN aliBuild -c shipdist/ --defaults fairship --chdir SHiPBuild build\
-	pythia6\
-	&& aliBuild clean --aggressive-cleanup --chdir SHiPBuild
-
-RUN aliBuild -c shipdist/ --defaults fairship --chdir SHiPBuild build\
-	XRootD\
-	googletest\
-	nanomsg\
-	HepMC\
-	&& aliBuild clean --aggressive-cleanup --chdir SHiPBuild
-
-RUN aliBuild -c shipdist/ --defaults fairship --chdir SHiPBuild build\
-	GEANT4\
-	&& aliBuild clean --aggressive-cleanup --chdir SHiPBuild
-
-RUN aliBuild -c shipdist/ --defaults fairship --chdir SHiPBuild build\
-	pythia\
-	&& aliBuild clean --aggressive-cleanup --chdir SHiPBuild
-
-RUN aliBuild -c shipdist/ --defaults fairship --chdir SHiPBuild build FairShip\
-	&& aliBuild clean --aggressive-cleanup --chdir SHiPBuild
+# RUN alienv -w sw enter FairShip/latest-fairship
