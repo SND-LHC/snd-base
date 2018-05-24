@@ -47,7 +47,7 @@ RUN yum -y update \
     && rm -rf /var/cache/yum \
     && pip install alibuild
 
-RUN git clone https://github.com/ShipSoft/shipdist.git
+RUN git clone https://github.com/olantwin/shipdist.git -b sklearn
 
 # RUN aliDoctor -c shipdist/ --defaults fairship FairShip --no-local ROOT
 
