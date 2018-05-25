@@ -1,4 +1,4 @@
-FROM cern/cc7-base:20180316
+FROM cern/cc7-base:20180516
 
 RUN yum -y update \
     && yum -y install \
