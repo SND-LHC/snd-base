@@ -49,12 +49,5 @@ RUN yum -y update \
 
 RUN git clone https://github.com/ShipSoft/shipdist.git
 
-# RUN aliDoctor -c shipdist/ --defaults fairship FairShip --no-local ROOT
-
 RUN aliBuild -c shipdist/ --defaults fairship build FairRoot GENIE EvtGen madgraph5 --no-local ROOT \
 	&& aliBuild clean --aggressive-cleanup
-
-RUN aliBuild -c shipdist/ --defaults fairship build FairShip --no-local ROOT \
-	&& aliBuild clean --aggressive-cleanup
-
-# RUN alienv -w sw enter FairShip/latest-fairship
