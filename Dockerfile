@@ -18,6 +18,7 @@ RUN yum -y update \
     libXmu-devel \
     mesa-libGL-devel \
     mesa-libGLU-devel \
+    mesa-dri-drivers \
     expat-devel  \
     python-devel \
     libxml2-devel \
@@ -41,6 +42,7 @@ RUN yum -y update \
     perl-devel \
     perl-ExtUtils-Embed \
     libpng{,-devel} \
+    dejavu-lgc-sans-fonts \
     && yum -y autoremove \
     && find /usr/share/locale | grep -v en | xargs rm -rf \
     && yum clean all \
@@ -49,5 +51,5 @@ RUN yum -y update \
 
 RUN git clone https://github.com/ShipSoft/shipdist.git
 
-RUN aliBuild -c shipdist/ --defaults fairship build FairRoot GENIE EvtGen madgraph5 --no-local ROOT \
+RUN aliBuild -c shipdist/ --defaults fairship build FairRoot GENIE EvtGen --no-local ROOT \
 	&& aliBuild clean --aggressive-cleanup
