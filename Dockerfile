@@ -1,4 +1,4 @@
-FROM cern/cc7-base:20180516
+FROM cern/cc7-base:20191002
 
 RUN yum -y update \
     && yum -y install \
@@ -41,7 +41,8 @@ RUN yum -y update \
     ncurses-devel \
     perl-devel \
     perl-ExtUtils-Embed \
-    libpng{,-devel} \
+    libpng-devel \
+    sqlite-devel \
     dejavu-lgc-sans-fonts \
     && yum -y autoremove \
     && find /usr/share/locale | grep -v en | xargs rm -rf \
