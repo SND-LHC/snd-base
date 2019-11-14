@@ -1,4 +1,4 @@
-FROM cern/cc7-base:20191002
+FROM cern/cc7-base:20191107
 
 RUN yum -y update \
     && yum -y install \
@@ -34,7 +34,7 @@ RUN yum -y update \
     libcurl-devel \
     bzip2 \
     bzip2-devel \
-    python2-pip \
+    python3-pip \
     bison{,-devel} \
     flex{,-devel} \
     environment-modules \
@@ -44,13 +44,30 @@ RUN yum -y update \
     libpng-devel \
     sqlite-devel \
     dejavu-lgc-sans-fonts \
+    tk{,-devel} \
+    tcl-devel \
     && yum -y autoremove \
     && find /usr/share/locale | grep -v en | xargs rm -rf \
     && yum clean all \
     && rm -rf /var/cache/yum \
-    && pip install alibuild
+    && pip3 install alibuild
 
 RUN git clone https://github.com/ShipSoft/shipdist.git
 
-RUN aliBuild -c shipdist/ --defaults fairship build FairRoot GENIE EvtGen --no-local ROOT \
-	&& aliBuild clean --aggressive-cleanup
+RUN aliBuild analytics off
+
+RUN aliBuild -c shipdist/ --defaults fairship build GCC-Toolchain
+
+RUN aliBuild -c shipdist/ --defaults fairship build GEANT4
+
+RUN aliBuild -c shipdist/ --defaults fairship build Python
+
+RUN aliBuild -c shipdist/ --defaults fairship build ZeroMQ
+
+RUN aliBuild -c shipdist/ --defaults fairship build lhapdf5
+
+RUN aliBuild -c shipdist/ --defaults fairship build GENIE EvtGen --no-local ROOT
+
+RUN aliBuild -c shipdist/ --defaults fairship build EvtGen --no-local ROOT
+
+RUN aliBuild -c shipdist/ --defaults fairship build FairRoot --no-local ROOT
