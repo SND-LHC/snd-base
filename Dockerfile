@@ -66,7 +66,7 @@ RUN aliBuild -c shipdist/ --defaults fairship build ZeroMQ
 
 RUN aliBuild -c shipdist/ --defaults fairship build lhapdf5
 
-RUN aliBuild -c shipdist/ --defaults fairship build GENIE EvtGen --no-local ROOT
+RUN aliBuild -c shipdist/ --defaults fairship build GENIE --no-local ROOT
 
 RUN aliBuild -c shipdist/ --defaults fairship build EvtGen --no-local ROOT
 
