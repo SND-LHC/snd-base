@@ -1,4 +1,5 @@
-FROM cern/cc7-base:20191107
+FROM cern/cc7-base:20201116-1.x86_64
+
 
 RUN yum -y update \
     && yum -y install \
@@ -34,7 +35,7 @@ RUN yum -y update \
     libcurl-devel \
     bzip2 \
     bzip2-devel \
-    python3-pip \
+    python3-{pip,devel} \
     bison{,-devel} \
     flex{,-devel} \
     environment-modules \
@@ -54,20 +55,9 @@ RUN yum -y update \
 
 RUN git clone https://github.com/ShipSoft/shipdist.git
 
-RUN aliBuild analytics off
-
-RUN aliBuild -c shipdist/ --defaults fairship build GCC-Toolchain
-
-RUN aliBuild -c shipdist/ --defaults fairship build GEANT4
-
-RUN aliBuild -c shipdist/ --defaults fairship build Python
-
-RUN aliBuild -c shipdist/ --defaults fairship build ZeroMQ
-
-RUN aliBuild -c shipdist/ --defaults fairship build lhapdf5
-
-RUN aliBuild -c shipdist/ --defaults fairship build GENIE --no-local ROOT
-
-RUN aliBuild -c shipdist/ --defaults fairship build EvtGen --no-local ROOT
-
-RUN aliBuild -c shipdist/ --defaults fairship build FairRoot --no-local ROOT
+RUN aliBuild analytics off && \
+    aliBuild \
+    -c shipdist/ \
+    --defaults fairship \
+    build FairRoot alpaca EvtGen GENIE \
+    --no-local ROOT
