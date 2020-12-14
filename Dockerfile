@@ -53,11 +53,24 @@ RUN yum -y update \
     && rm -rf /var/cache/yum \
     && pip3 install alibuild
 
-RUN git clone https://github.com/ShipSoft/shipdist.git
+RUN git clone https://github.com/SND-LHC/snddist.git
 
 RUN aliBuild analytics off && \
     aliBuild \
-    -c shipdist/ \
-    --defaults fairship \
+    -c snddist/ \
+    build GCC-Toolchain
+
+RUN aliBuild analytics off && \
+    aliBuild \
+    -c snddist/ \
+    build GEANT4
+
+RUN aliBuild analytics off && \
+    aliBuild \
+    -c snddist/ \
+    build ROOT
+
+RUN aliBuild \
+    -c snddist/ \
     build FairRoot alpaca EvtGen GENIE \
     --no-local ROOT
